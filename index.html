@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 26 Tuesday and Wednesday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            header { padding: 1rem; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Week 26 Tuesday and Wednesday Practice Quiz</h1>
+        <div class="controls-wrapper">
+            <!-- Pin Button -->
+            <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                📍
+            </button>
+            
+            <div class="theme-control">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="dark">Modern Dark</option>
+                    <option value="midnight">Midnight</option>
+                    <option value="light">Modern Light</option>
+                    <option value="legacy-dark">Legacy Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="contrast">High Contrast</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData = [
+            // --- Section 1: Thoracic Wall, Heart, and Mediastinum ---
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO1: Identify the bones and joints of the thoracic cage... Discuss the most common sites of [injuries].",
+                fullLO: "LO1: Identify the bones and joints of the thoracic cage along with their major anatomical features. Discuss the most common sites of rib fractures and the potential clinical consequences.",
+                question: "A 24-year-old male is brought to the emergency department following a motor vehicle collision. He complains of severe pain in his chest wall that worsens with breathing. Physical examination reveals a segment of the thoracic wall moving inward during inspiration and outward during expiration. This paradoxical movement is most likely caused by:",
+                options: {
+                    A: "A fracture of the manubriosternal joint",
+                    B: "A single fracture of the first rib",
+                    C: "Dislocation of the costovertebral joints",
+                    D: "Multiple rib fractures causing a loose segment",
+                    E: "Paralysis of the intercostal muscles"
+                },
+                correctAnswer: "D",
+                rationale: "Flail chest occurs when multiple rib fractures cause a segment of the thoracic wall to move freely. This loose segment moves paradoxically (inward on inspiration and outward on expiration).",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 2: \"Flail chest is an extremely painful injury that occurs when multiple rib fractures cause a segment of the thoracic wall to move freely. The loose segment moves paradoxically (inward on inspiration and outward on expiration) and impairs ventilation.\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO1: Identify the bones and joints of the thoracic cage... Discuss the most common sites of [injuries].",
+                fullLO: "LO1: Identify the bones and joints of the thoracic cage along with their major anatomical features. Discuss the most common sites of rib fractures and the potential clinical consequences.",
+                question: "A 45-year-old construction worker falls from a ladder and lands on his side. Radiographs reveal a rib fracture. Based on the anatomy of the rib, which location is most susceptible to fracture due to being the weakest part?",
+                options: {
+                    A: "At the costal groove",
+                    B: "At the costotransverse joint",
+                    C: "At the head of the rib",
+                    D: "At the neck of the rib",
+                    E: "Just anterior to the costal angle"
+                },
+                correctAnswer: "E",
+                rationale: "The weakest part of the rib is located just anterior to its angle, making it the most common site for fractures from direct blows or crushing injuries.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 2: \"Rib fractures commonly result from direct blows or crushing injuries, with the weakest part of the rib located just anterior to its angle.\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO2: Identify the thoracic wall muscles... and diaphragm. Discuss their innervation and actions...",
+                fullLO: "LO2: Identify the thoracic wall muscles (i.e. external, internal, & innermost intercostals, subcostalis, and transversus thoracis) and diaphragm. Discuss their innervation and actions, especially their roles in respiration.",
+                question: "A 35-year-old male undergoes surgery that inadvertently damages the phrenic nerve on the right side. Post-operative imaging is performed to assess diaphragmatic function. Which of the following findings would be expected during inspiration?",
+                options: {
+                    A: "The right hemidiaphragm ascends while the left descends",
+                    B: "The right hemidiaphragm descends normally",
+                    C: "The right hemidiaphragm remains fixed and immobile",
+                    D: "The thoracic cavity volume increases more than normal",
+                    E: "The abdominal viscera are pushed inferiorly on the right"
+                },
+                correctAnswer: "A",
+                rationale: "Paralysis of the hemidiaphragm results in paradoxical movement. Instead of descending during inspiration, the paralyzed dome ascends as it is pushed superiorly by abdominal viscera.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 4: \"Instead of descending during inspiration, the paralyzed dome ascends as it is pushed superiorly by the abdominal viscera. It then descends during expiration due to the positive pressure in the lungs.\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO2: Identify the thoracic wall muscles... and diaphragm. Discuss their innervation and actions...",
+                fullLO: "LO2: Identify the thoracic wall muscles (i.e. external, internal, & innermost intercostals, subcostalis, and transversus thoracis) and diaphragm. Discuss their innervation and actions, especially their roles in respiration.",
+                question: "A medical student is examining the muscles of the thoracic wall. She identifies a muscle layer where the fibers run inferoanteriorly, described as the \"hand in your pocket\" orientation. Which muscle group has she identified?",
+                options: {
+                    A: "External intercostals",
+                    B: "Innermost intercostals",
+                    C: "Internal intercostals",
+                    D: "Subcostalis",
+                    E: "Transversus thoracis"
+                },
+                correctAnswer: "A",
+                rationale: "The external intercostal fibers run inferoanteriorly, often described using the mnemonic \"hand in your pocket.\"",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 4: \"External intercostals... Fibers run anteroinferiorly ('hands in pockets')\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO3: Discuss the blood supply and innervation of the thoracic wall.",
+                fullLO: "LO3: Discuss the blood supply and innervation of the thoracic wall.",
+                question: "A surgeon is performing a procedure requiring access to the intercostal space. To avoid damaging the primary neurovascular bundle, the incision should be made:",
+                options: {
+                    A: "Along the inferior border of the intercostal space",
+                    B: "Along the superior border of the intercostal space",
+                    C: "Directly through the middle of the rib",
+                    D: "Exactly in the middle of the intercostal space",
+                    E: "Posterior to the angle of the rib only"
+                },
+                correctAnswer: "D",
+                rationale: "The main neurovascular bundle runs in the costal groove along the superior border of the intercostal space (inferior edge of the superior rib). Smaller collateral branches run along the inferior border of the space. Therefore, the safe zone is the middle of the space.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 5: \"The intercostal neurovasculature run in the costal groove along the superior border of the intercostal space. In addition, there are smaller collateral branches of the intercostal arteries & veins running along the inferior border of the intercostal space. So, it is important to stay as close to the middle of the space as possible in order to avoid iatrogenic injury\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO3: Discuss the blood supply and innervation of the thoracic wall.",
+                fullLO: "LO3: Discuss the blood supply and innervation of the thoracic wall.",
+                question: "A 10-year-old child is diagnosed with coarctation of the aorta. Radiographs show erosion of the adjacent surfaces of the ribs. This finding is caused by dilation of which arteries providing collateral circulation?",
+                options: {
+                    A: "Azygos veins",
+                    B: "Coronary arteries",
+                    C: "Internal thoracic and intercostal arteries",
+                    D: "Pericardiacophrenic arteries",
+                    E: "Superior vena cava"
+                },
+                correctAnswer: "C",
+                rationale: "In aortic coarctation, the internal thoracic and intercostal arteries provide collateral circulation. These vessels enlarge and cause erosion of the ribs.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 5: \"The internal thoracic arteries and the anterior & posterior intercostal arteries provide important pathways of collateral circulation in the presence of an aortic stenosis or coarctation of the aorta... cause notable pulsation in the intercostal spaces and erode the adjacent surfaces of the ribs\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO4: Describe the structure and innervation of the pericardial sac...",
+                fullLO: "LO4: Describe the structure and innervation of the pericardial sac, and discuss the anatomical basis and/or clinical presentation of pericardial effusion, cardiac tamponade, and pericardiocentesis.",
+                question: "A 55-year-old male presents with sharp chest pain that radiates to his left shoulder and neck. He notes the pain is relieved by sitting up and leaning forward. On physical exam, a friction rub is audible. The pain distribution is most likely due to sensory innervation supplied by which nerve?",
+                options: {
+                    A: "Intercostal nerves (T1-T4)",
+                    B: "Long thoracic nerve",
+                    C: "Phrenic nerve (C3-C5)",
+                    D: "Recurrent laryngeal nerve",
+                    E: "Vagus nerve (CN X)"
+                },
+                correctAnswer: "C",
+                rationale: "Pericarditis causes pain mediated by the phrenic nerve, which innervates the pericardium. This pain is referred to the C3-C5 dermatomes (shoulder/neck).",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 7: \"Because of the sensory innervation of the pericardium by the phrenic nerve, pericarditis can result in referred pain to the neck, arms, or shoulders (often the left side).\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO4: Describe the structure and innervation of the pericardial sac...",
+                fullLO: "LO4: Describe the structure and innervation of the pericardial sac, and discuss the anatomical basis and/or clinical presentation of pericardial effusion, cardiac tamponade, and pericardiocentesis.",
+                question: "A patient arrives in the emergency department with hypotension, distended neck veins, and muffled heart sounds. A diagnosis of cardiac tamponade is suspected. A needle is inserted to remove fluid from the pericardial cavity. To safely access the fluid, the needle is inserted near the sternum in which anatomical location?",
+                options: {
+                    A: "2nd left intercostal space",
+                    B: "3rd right intercostal space",
+                    C: "5th or 6th left intercostal space",
+                    D: "7th right intercostal space",
+                    E: "Jugular notch"
+                },
+                correctAnswer: "C",
+                rationale: "Pericardiocentesis is performed by inserting a wide-bore needle into the 5th or 6th left intercostal space near the sternum.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 7: \"This is performed by inserting a widebore needle into the fifth or sixth left intercostal space near the sternum.\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO5: Describe the basic orientation and position of the heart... Identify where one can best auscultate the heart valves.",
+                fullLO: "LO5: Describe the basic orientation and position of the heart, its chambers, and valves relative to landmarks found on the anterior thoracic wall. Identify where one can best auscultate the heart valves.",
+                question: "A medical student is asked to auscultate the mitral valve. Based on surface anatomy, where should the stethoscope be placed to best hear the closure of this valve?",
+                options: {
+                    A: "Left 2nd intercostal space by the sternal border",
+                    B: "Left 5th intercostal space by the sternal border",
+                    C: "Left 5th intercostal space in the midclavicular line",
+                    D: "Right 2nd intercostal space by the sternal border",
+                    E: "Right 5th intercostal space in the midclavicular line"
+                },
+                correctAnswer: "C",
+                rationale: "The mitral valve is best auscultated at the Left 5th intercostal space in the midclavicular line over the apex of the heart.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 11: \"Mitral valve – Left 5th intercostal space in the midclavicular line over apex of heart\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO5: Describe the basic orientation and position of the heart... Identify where one can best auscultate the heart valves.",
+                fullLO: "LO5: Describe the basic orientation and position of the heart, its chambers, and valves relative to landmarks found on the anterior thoracic wall. Identify where one can best auscultate the heart valves.",
+                question: "During a physical exam, a physician wishes to assess the aortic valve. Although the valve itself is located posterior to the sternum, the sound of its closure is best projected to which location?",
+                options: {
+                    A: "Left 2nd intercostal space",
+                    B: "Left 5th intercostal space",
+                    C: "Right 2nd intercostal space",
+                    D: "Right 5th intercostal space",
+                    E: "Xiphoid process"
+                },
+                correctAnswer: "C",
+                rationale: "The aortic valve is best auscultated at the Right 2nd intercostal space by the sternal border.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 11: \"Aortic valve – Right 2nd intercostal space by sternal border\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO6: Describe the landmark anatomical features of the exterior and interior of the heart...",
+                fullLO: "LO6: Describe the landmark anatomical features of the exterior and interior of the heart including coronary vasculature, chambers, valves, and conduction system and their clinical significance.",
+                question: "A cardiologist is viewing an echocardiogram of the right ventricle. She identifies a muscular band extending from the inferior part of the interventricular septum to the base of the anterior papillary muscle. This structure, which carries conduction fibers, is known as the:",
+                options: {
+                    A: "Conus arteriosus",
+                    B: "Crista terminalis",
+                    C: "Fossa ovalis",
+                    D: "Pectinate muscle",
+                    E: "Septomarginal trabecula (moderator band)"
+                },
+                correctAnswer: "E",
+                rationale: "The septomarginal trabecula (moderator band) is a band of cardiac muscle in the RV carrying conduction fibers to the anterior papillary muscle.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 9: \"Septomarginal trabecula (moderator band) – muscular band of heart tissue that runs from the inferior part of the IV septum to the base of the anterior papillary muscle\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO6: Describe the landmark anatomical features of the exterior and interior of the heart...",
+                fullLO: "LO6: Describe the landmark anatomical features of the exterior and interior of the heart including coronary vasculature, chambers, valves, and conduction system and their clinical significance.",
+                question: "During an autopsy, a pathologist examines the interior of the right atrium. He notes a vertical ridge that separates the smooth posterior wall from the rough, muscular anterior wall. This structure is identified as the:",
+                options: {
+                    A: "Chordae tendineae",
+                    B: "Crista terminalis",
+                    C: "Interatrial septum",
+                    D: "Trabeculae carneae",
+                    E: "Valve of the coronary sinus"
+                },
+                correctAnswer: "B",
+                rationale: "The crista terminalis is the vertical ridge in the right atrium separating the smooth posterior wall from the rough anterior wall.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 8: \"Crista terminalis – vertical ridge separating rough anterior and smooth posterior walls\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO7: Identify the inflow and outflow vessels associated with the heart... and describe the course of blood...",
+                fullLO: "LO7: Identify the inflow and outflow vessels associated with the heart, along with their major branches and tributaries, and describe the course of blood as it passes through the heart, beginning in the SVC, IVC, or coronary sinus and ending in the ascending aorta.",
+                question: "A patient is diagnosed with a blockage in the Left Anterior Descending (LAD) artery. This vessel typically runs in the anterior interventricular groove. Which venous structure runs alongside this artery?",
+                options: {
+                    A: "Anterior cardiac vein",
+                    B: "Coronary sinus",
+                    C: "Great cardiac vein",
+                    D: "Middle cardiac vein",
+                    E: "Small cardiac vein"
+                },
+                correctAnswer: "C",
+                rationale: "The Great cardiac vein runs with the Anterior interventricular artery (LAD).",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 12: \"Great cardiac vein – runs with the anterior interventricular artery (LAD)...\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO7: Identify the inflow and outflow vessels associated with the heart... and describe the course of blood...",
+                fullLO: "LO7: Identify the inflow and outflow vessels associated with the heart, along with their major branches and tributaries, and describe the course of blood as it passes through the heart, beginning in the SVC, IVC, or coronary sinus and ending in the ascending aorta.",
+                question: "A surgeon is reviewing the anatomy of the coronary circulation. She notes that the Right Coronary Artery (RCA) typically gives rise to a specific branch that supplies the lateral aspect of the right ventricle. This branch is the:",
+                options: {
+                    A: "Anterior interventricular artery",
+                    B: "Circumflex artery",
+                    C: "Left marginal artery",
+                    D: "Posterior descending artery",
+                    E: "Right marginal artery"
+                },
+                correctAnswer: "E",
+                rationale: "The Right Marginal Artery runs along the inferior border and supplies the lateral aspect of the right ventricle.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 11: \"Right Marginal Artery – runs along the right inferior border of the heart towards the apex of the heart; supplies the lateral aspect of the right ventricle\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO8: Identify the azygos/hemiazygos venous systems. Discuss its role in venous drainage.",
+                fullLO: "LO8: Identify the azygos/hemiazygos venous systems. Discuss its role in venous drainage.",
+                question: "A patient has a tumor compressing the Inferior Vena Cava (IVC), obstructing blood return from the abdomen. Which venous system is most likely to provide a collateral pathway to return blood to the Superior Vena Cava (SVC)?",
+                options: {
+                    A: "Azygos system",
+                    B: "Coronary sinus system",
+                    C: "Internal thoracic veins",
+                    D: "Pulmonary veins",
+                    E: "Subclavian veins"
+                },
+                correctAnswer: "A",
+                rationale: "The azygos system drains blood from the posterior walls and forms an important collateral pathway between the SVC and IVC, especially if the IVC is blocked.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 15: \"Azygos System of Veins... Form an important collateral pathway for venous blood between the SVC & IVC, especially if the IVC is blocked.\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO8: Identify the azygos/hemiazygos venous systems. Discuss its role in venous drainage.",
+                fullLO: "LO8: Identify the azygos/hemiazygos venous systems. Discuss its role in venous drainage.",
+                question: "The azygos vein ascends on the right side of the vertebral column. Into which vessel does the arch of the azygos vein directly drain?",
+                options: {
+                    A: "Brachiocephalic vein",
+                    B: "Inferior vena cava",
+                    C: "Internal jugular vein",
+                    D: "Subclavian vein",
+                    E: "Superior vena cava"
+                },
+                correctAnswer: "E",
+                rationale: "The arch of the azygos vein drains into the SVC just above the pericardial sac.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 14: \"The azygous vein drains into the SVC just above the pericardial sac.\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO9: Discuss the autonomic innervation associated with the thoracic viscera. Explain cardiac referred pain...",
+                fullLO: "LO9: Discuss the autonomic innervation associated with the thoracic viscera. Explain cardiac referred pain, and identify the locations where pain is referred.",
+                question: "A 60-year-old male presenting with a myocardial infarction complains of pain in his left upper arm and shoulder. This pattern of referred pain occurs because the visceral afferent pain fibers from the heart travel retrograde to the spinal cord segments:",
+                options: {
+                    A: "C3 – C5",
+                    B: "C6 – C8",
+                    C: "T1 – T5",
+                    D: "T6 – T9",
+                    E: "T10 – T12"
+                },
+                correctAnswer: "C",
+                rationale: "Visceral afferent pain fibers follow sympathetic fibers retrograde to the spinal cord segments T1-T4/5. The brain interprets this as somatic pain from those dermatomes (medial arm/shoulder).",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 14: \"Visceral afferent pain fibers travel retrograde following the sympathetic nerve fibers to the posterior horn of spinal cord segments T1-T4/5... pain is referred to somatic structures... Since the sympathetics to the heart originate in the T1-T5 spinal cord, it is to these dermatomes that pain is referred.\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO9: Discuss the autonomic innervation associated with the thoracic viscera. Explain cardiac referred pain...",
+                fullLO: "LO9: Discuss the autonomic innervation associated with the thoracic viscera. Explain cardiac referred pain, and identify the locations where pain is referred.",
+                question: "During a cardiac procedure, the vagus nerve is stimulated. Which of the following physiological effects is expected?",
+                options: {
+                    A: "Constriction of coronary arteries",
+                    B: "Dilation of coronary arteries",
+                    C: "Increased force of contraction",
+                    D: "Increased heart rate",
+                    E: "Increased pain sensation"
+                },
+                correctAnswer: "A",
+                rationale: "Parasympathetic innervation (Vagus nerve) slows heart rate, reduces force of contraction, and constricts coronary arteries.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 13: \"Parasympathetics innervation... Function: slows heart rate, reduces force of contraction, & constricts coronary arteries\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO10: Identify and locate the major structures that pass through each part of the mediastinum...",
+                fullLO: "LO10: Identify and locate the major structures that pass through each part of the mediastinum; explain the anatomic function of these structures and their relationship to other structures. Relate major surface anatomical landmarks to underlying structures in the mediastinum.",
+                question: "A radiologist identifies a mass in the superior mediastinum. Which of the following structures is normally located in this compartment?",
+                options: {
+                    A: "Ascending aorta",
+                    B: "Heart",
+                    C: "Main pulmonary trunk",
+                    D: "Thymus",
+                    E: "Trifurcation of the trachea"
+                },
+                correctAnswer: "D",
+                rationale: "The thymus is located in the superior mediastinum (and anterior mediastinum). The heart, ascending aorta, and pulmonary trunk are in the middle mediastinum. (Note: Trachea bifurcates at the sternal angle, the border between superior and inferior).",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 6: \"Superior Mediastinum... Contents: ... thymus, trachea, esophagus...\""
+            },
+            {
+                section: "Thoracic Wall, Heart, and Mediastinum",
+                maskedLO: "LO10: Identify and locate the major structures that pass through each part of the mediastinum...",
+                fullLO: "LO10: Identify and locate the major structures that pass through each part of the mediastinum; explain the anatomic function of these structures and their relationship to other structures. Relate major surface anatomical landmarks to underlying structures in the mediastinum.",
+                question: "A patient sustains an injury to the posterior mediastinum. Which of the following structures is located in this compartment and is at risk?",
+                options: {
+                    A: "Arch of the azygos vein",
+                    B: "Ascending aorta",
+                    C: "Heart",
+                    D: "Phrenic nerves",
+                    E: "Thoracic duct"
+                },
+                correctAnswer: "E",
+                rationale: "The posterior mediastinum contains the esophagus, thoracic aorta, azygos system, thoracic duct, vagus nerves, sympathetic trunks, and splanchnic nerves.",
+                source: "Thoracic_Wall_Heart_and_Mediastinum_Notes.pdf, Page 6: \"Posterior Mediastinum... Contents: Esophagus, thoracic aorta, azygos... thoracic duct...\""
+            },
+
+            // --- Section 2: Cardiovascular Histology ---
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO1: Structure of the heart: Endocardium, myocardium, and epicardium.",
+                fullLO: "LO1: Structure of the heart: Endocardium, myocardium, and epicardium.",
+                question: "A pathologist examines a section of heart tissue and identifies a layer containing cardiac muscle arranged spirally. This layer is the thickest of the three heart layers. Which layer is being examined?",
+                options: {
+                    A: "Adventitia",
+                    B: "Endocardium",
+                    C: "Epicardium",
+                    D: "Myocardium",
+                    E: "Subendocardial layer"
+                },
+                correctAnswer: "D",
+                rationale: "The myocardium consists mainly of cardiac muscle and is the thickest layer due to force requirements.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 7: \"Myocardium: Consists mainly of cardiac muscle arranged spirally around each heart chamber – thickest layer due to force requirements\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO1: Structure of the heart: Endocardium, myocardium, and epicardium.",
+                fullLO: "LO1: Structure of the heart: Endocardium, myocardium, and epicardium.",
+                question: "In which layer of the heart wall are the Purkinje fibers (modified cardiac muscle cells) located?",
+                options: {
+                    A: "Deep layer of the Epicardium",
+                    B: "Fibrous Pericardium",
+                    C: "Middle of the Myocardium",
+                    D: "Subendocardial layer of the Endocardium",
+                    E: "Surface of the Endothelium"
+                },
+                correctAnswer: "D",
+                rationale: "The endocardium includes a deep layer of connective tissue (subendocardial layer) that merges with the myocardium; this is where Purkinje fibers are located.",
+                source: "Cardiovascular_Histology_PDF.pdf, Pages 7 & 10: \"Endocardium... deep layer of connective tissue that merges with the myocardium (subendocardial layer)... Purkinje fibers (cells)... Lightly stained with Eosin, in the subendocardial space.\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO2: Basic structures of blood vessels",
+                fullLO: "LO2: Basic structures of blood vessels",
+                question: "Which layer of the vascular wall is composed primarily of smooth muscle cells arranged helically and is responsible for vasoconstriction?",
+                options: {
+                    A: "External elastic lamina",
+                    B: "Internal elastic lamina",
+                    C: "Tunica adventitia",
+                    D: "Tunica intima",
+                    E: "Tunica media"
+                },
+                correctAnswer: "E",
+                rationale: "The media contains smooth muscle cells arranged helically. Its primary function is to mediate vasoconstriction and vasorelaxation.",
+                source: "Cardiovascular_Histology_PDF.pdf, Pages 12 & 13: \"Media: Smooth muscle cells... Present in the walls of all vessels larger than capillaries and are arranged helically in layers... Primary function to mediate vasoconstriction\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO2: Basic structures of blood vessels",
+                fullLO: "LO2: Basic structures of blood vessels",
+                question: "In large arteries, the adventitia contains a supply of microvasculature to nourish the outer layers of the vessel wall. What are these small vessels called?",
+                options: {
+                    A: "Arteriovenous shunts",
+                    B: "Glomus bodies",
+                    C: "Metarterioles",
+                    D: "Sinusoids",
+                    E: "Vasa vasorum"
+                },
+                correctAnswer: "E",
+                rationale: "The vasa vasorum are arterioles, capillaries, and venules in the adventitia that supply O2 and nutrients to larger vessels.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 13: \"Vasa Vasorum: Arterioles, capillaries, and venules that supply O2 and nutrients to larger vessels.\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO3: Structure and function of elastic arteries, muscular arteries, and arterioles.",
+                fullLO: "LO3: Structure and function of elastic arteries, muscular arteries, and arterioles.",
+                question: "Which type of artery is characterized by a thick media containing elastic lamellae alternating with layers of smooth muscle fibers, allowing it to stretch during systole and rebound during diastole?",
+                options: {
+                    A: "Arterioles",
+                    B: "Elastic arteries",
+                    C: "Metarterioles",
+                    D: "Muscular arteries",
+                    E: "Postcapillary venules"
+                },
+                correctAnswer: "B",
+                rationale: "Elastic arteries (like the aorta) have a thick media with elastic lamellae. This allows stretch during systole and passive rebound during diastole to maintain pressure.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 16: \"Elastic Arteries... Major histological features: thick media with elastic lammellae alternating with layers of smooth muscle fibers\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO3: Structure and function of elastic arteries, muscular arteries, and arterioles.",
+                fullLO: "LO3: Structure and function of elastic arteries, muscular arteries, and arterioles.",
+                question: "A histological section of a blood vessel reveals a lumen as wide as the wall is thick, a media with 1-2 layers of smooth muscle cells, and an absence of an internal elastic lamina. This vessel is most likely a(n):",
+                options: {
+                    A: "Arteriole",
+                    B: "Capillary",
+                    C: "Elastic artery",
+                    D: "Muscular artery",
+                    E: "Venule"
+                },
+                correctAnswer: "A",
+                rationale: "Arterioles are the smallest arterial branches with only 1-2 smooth muscle cell layers. They have no internal elastic lamina and the lumen is as wide as the wall is thick.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 20: \"Arterioles: Smallest arterial branch with only 1-2 SMC layers... Lumens as wide as wall is thick... Internal elastic lamina is absent\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO4: Capillaries (three types)",
+                fullLO: "LO4: Capillaries (three types)",
+                question: "Which type of capillary is characterized by a sieve-like structure with a continuous basal lamina, typically found in organs requiring rapid exchange such as the kidneys and endocrine glands?",
+                options: {
+                    A: "Continuous capillaries",
+                    B: "Discontinuous capillaries",
+                    C: "Fenestrated capillaries",
+                    D: "Lymphatic capillaries",
+                    E: "Sinusoidal capillaries"
+                },
+                correctAnswer: "C",
+                rationale: "Fenestrated capillaries have a sieve-like structure with fenestrations covered by a continuous basal lamina. They are found in the kidney, intestine, and endocrine glands.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 26: \"Fenestrated Capillaries: Sieve like structure... Basal lamina is continuous... Found in organs that need rapid exchange (kidneys, intestine, endocrine glands)\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO4: Capillaries (three types)",
+                fullLO: "LO4: Capillaries (three types)",
+                question: "A tissue sample from the liver shows capillaries with large irregular spaces, discontinuous basal laminae, and large diameters (30-40 µm). These vessels allow maximal exchange of macromolecules. What type of capillary are these?",
+                options: {
+                    A: "Continuous",
+                    B: "Fenestrated",
+                    C: "Lymphatic",
+                    D: "Metarterioles",
+                    E: "Sinusoidal (Discontinuous)"
+                },
+                correctAnswer: "E",
+                rationale: "Discontinuous (Sinusoidal) capillaries have wide irregular spaces, highly discontinuous basal laminae, and are found in the liver, spleen, and bone marrow.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 26: \"Discontinuous Capillaries (Sinusoid)... Discontinuous endothelium with wide irregular spaces... Highly discontinuous basal laminae... Found in liver, spleen, bone marrow\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO5: Veins",
+                fullLO: "LO5: Veins",
+                question: "Histological examination of a vessel reveals a thin subendothelial layer, small bundles of smooth muscle cells with reticular fibers in the media, and a well-developed adventitia. The vessel contains paired folds of the intima. What is the function of these intimal folds?",
+                options: {
+                    A: "To allow for rapid vasodilation",
+                    B: "To anchor the vessel to surrounding tissue",
+                    C: "To prevent backflow of blood",
+                    D: "To produce clotting factors",
+                    E: "To secrete nitric oxide"
+                },
+                correctAnswer: "C",
+                rationale: "Medium and large veins have valves, which are paired folds of the intima, to prevent backflow.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 32: \"Medium and large veins have valves of paired folds of the intima to prevent backflow\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO5: Veins",
+                fullLO: "LO5: Veins",
+                question: "A patient presents with abnormally dilated veins in the legs. This condition is caused by a decline in muscle tone and connective tissue within the veins. What is this condition called?",
+                options: {
+                    A: "Arteriosclerosis",
+                    B: "Atherosclerosis",
+                    C: "Deep Vein Thrombosis",
+                    D: "Lymphedema",
+                    E: "Varicose veins"
+                },
+                correctAnswer: "E",
+                rationale: "Varicose veins are abnormally dilated veins usually in the leg, caused by a decline in muscle tone and connective tissue.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 33: \"Varicose Veins... Abnormally dilated veins usually in the leg... Caused by a decline in muscle tone, connective tissue in the veins\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO6: Structure and function of lymphatics",
+                fullLO: "LO6: Structure and function of lymphatics",
+                question: "Which of the following structures helps maintain the patency of lymphatic capillaries by binding the endothelial cells to the surrounding tissue?",
+                options: {
+                    A: "Anchoring filaments (elastic fibers)",
+                    B: "Basal lamina",
+                    C: "Internal elastic lamina",
+                    D: "Pericytes",
+                    E: "Smooth muscle cells"
+                },
+                correctAnswer: "A",
+                rationale: "Lymphatic capillaries have openings between cells maintained by anchoring filaments (elastic fibers) that also bind cells to surrounding tissue.",
+                source: "Cardiovascular_Histology_PDF.pdf, Page 35: \"Openings between cells maintained by anchoring filaments (elastic fibers) - Also bind cells to surrounding tissue\""
+            },
+            {
+                section: "Cardiovascular Histology",
+                maskedLO: "LO6: Structure and function of lymphatics",
+                fullLO: "LO6: Structure and function of lymphatics",
+                question: "Fluid collected from the interstitial space by lymphatic capillaries eventually empties into the blood stream via which vessels?",
+                options: {
+                    A: "Aorta and Pulmonary trunk",
+                    B: "Azygos and Hemiazygos veins",
+                    C: "Inferior Vena Cava and Superior Vena Cava",
+                    D: "Left and Right Internal Jugular/Subclavian vein junctions",
+                    E: "Renal veins"
+                },
+                correctAnswer: "D",
+                rationale: "Lymphatic vessels converge at the thoracic duct and right lymphatic duct, which empty into the blood at the junctions of the internal jugular veins. (Specifically, the text says \"Left internal jugular and right internal jugular\" in the context of emptying near the heart).",
+                source: "Cardiovascular_Histology_PDF.pdf, Pages 4 & 35: \"Empty into the large veins near the heart... Left internal jugular and right internal jugular\""
+            },
+
+            // --- Section 3: Cardiac Cycle & Physiology of the ECG ---
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO1: Explain the mechanism (Na,K,Ca) for resting Em and the action potential...",
+                fullLO: "LO1: Explain the mechanism (Na,K,Ca) for resting Em and the action potential in cardiomyocytes and pacemaker cells, and the effect of the autonomic nervous system on each.",
+                question: "In cardiac pacemaker cells, the spontaneous depolarization observed during Phase 4 is primarily driven by which current?",
+                options: {
+                    A: "Inward Calcium current (ICa)",
+                    B: "Inward Sodium current via the \"funny\" channel (If)",
+                    C: "Outward Chloride current",
+                    D: "Outward Potassium current (IK)",
+                    E: "Rapid Sodium influx via fast channels"
+                },
+                correctAnswer: "B",
+                rationale: "Phase 4 in pacemaker cells involves sodium influx increasing due to Na+ moving in through the \"f\" (funny) channel.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 10: \"Phase 4... Sodium influx increasing due to Na+ moving in through the ' f ' channel (e.g. funny channel).\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO1: Explain the mechanism (Na,K,Ca) for resting Em and the action potential...",
+                fullLO: "LO1: Explain the mechanism (Na,K,Ca) for resting Em and the action potential in cardiomyocytes and pacemaker cells, and the effect of the autonomic nervous system on each.",
+                question: "The plateau phase (Phase 2) of the ventricular cardiomyocyte action potential is primarily maintained by the influx of which ion?",
+                options: {
+                    A: "Calcium (Ca++)",
+                    B: "Chloride (Cl-)",
+                    C: "Magnesium (Mg++)",
+                    D: "Potassium (K+)",
+                    E: "Sodium (Na+)"
+                },
+                correctAnswer: "A",
+                rationale: "The plateau (Phase 2) is due to sustained Ca++ influx.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 9: \"The plateau (2) is due to sustained Ca++ influx.\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO2: Explain how cardiac cell electrical activity... is reflected in the ECG.",
+                fullLO: "LO2: Explain how cardiac cell electrical activity and the wave of ventricular depolarization are reflected in the ECG.",
+                question: "Which component of the ECG represents the sequential depolarization of the ventricular cells?",
+                options: {
+                    A: "P wave",
+                    B: "PR interval",
+                    C: "QRS complex",
+                    D: "ST segment",
+                    E: "T wave"
+                },
+                correctAnswer: "C",
+                rationale: "The QRS complex on the ECG occurs when all the ventricular cells are sequentially going through the \"upsweep\" of their action potential (depolarization).",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 17: \"The QRS complex on the ECG is when all the ventricular cells are sequentially going through the 'upsweep' of their action potential.\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO2: Explain how cardiac cell electrical activity... is reflected in the ECG.",
+                fullLO: "LO2: Explain how cardiac cell electrical activity and the wave of ventricular depolarization are reflected in the ECG.",
+                question: "During the S-T segment of the ECG, the voltage is approximately zero (isoelectric). What is the state of the ventricular myocytes during this period?",
+                options: {
+                    A: "All cells are depolarized (in the plateau phase)",
+                    B: "All cells are repolarizing",
+                    C: "All cells are resting (polarized)",
+                    D: "Half the cells are depolarized, half are polarized",
+                    E: "The cells are hyperpolarized"
+                },
+                correctAnswer: "A",
+                rationale: "During the S-T segment, all ventricular myocytes are in the plateau of their action potential. Since all cells are in the same state of polarity, the voltage difference is zero.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 19: \"Once you hit the S-T segment, all the ventricular myocytes are in the plateau of their action potential... All cells are in the same state of polarity, so the S-T segment voltage is zero\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO3: Diagram the electrode placement for a 3-lead ECG...",
+                fullLO: "LO3: Diagram the electrode placement for a 3-lead ECG, label the 3 limb leads and 3 augmented leads. Taking the typical instantaneous mean vector, explain the relative magnitude and direction of QRS voltages on each of these leads.",
+                question: "In Einthoven's triangle, Lead II connects which two electrodes?",
+                options: {
+                    A: "Left arm (-) to Left leg (+)",
+                    B: "Right arm (-) to Left arm (+)",
+                    C: "Right arm (-) to Left leg (+)",
+                    D: "Right arm (+) to Left arm (-)",
+                    E: "Right arm (+) to Left leg (-)"
+                },
+                correctAnswer: "C",
+                rationale: "Lead II connects the Right Arm (negative) to the Leg (positive). The slides show the RA is negative and LL is positive for Lead II.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 26: \"[Diagram of Einthoven's Triangle showing Lead II between RA and LL]\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO3: Diagram the electrode placement for a 3-lead ECG...",
+                fullLO: "LO3: Diagram the electrode placement for a 3-lead ECG, label the 3 limb leads and 3 augmented leads. Taking the typical instantaneous mean vector, explain the relative magnitude and direction of QRS voltages on each of these leads.",
+                question: "Which ECG lead is considered an augmented limb lead that views the heart from the left shoulder?",
+                options: {
+                    A: "aVF",
+                    B: "aVL",
+                    C: "aVR",
+                    D: "Lead I",
+                    E: "Lead III"
+                },
+                correctAnswer: "B",
+                rationale: "aVL stands for augmented Voltage Left (arm). The positive electrode is on the left arm.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 27: \"The name of the lead tells you where the positive electrode is: aVLeft...\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO4: Based on knowledge of electrode location, describe the predicted direction of the mean vector...",
+                fullLO: "LO4: Based on knowledge of electrode location, describe the predicted direction of the mean vector based on voltage/shape of QRS in leads I, II, and III.",
+                question: "If the mean electrical vector of the heart is traveling parallel to Lead II and pointing towards the positive electrode, what will the QRS complex look like in Lead II?",
+                options: {
+                    A: "Biphasic (equal positive and negative)",
+                    B: "Flat (isoelectric)",
+                    C: "Maximum negative voltage",
+                    D: "Maximum positive voltage",
+                    E: "Zero voltage"
+                },
+                correctAnswer: "D",
+                rationale: "When the vector most directly parallels Lead II and points to its positive electrode, it reads the greatest positive voltage.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 33: \"The vector (red arrow) here most directly parallels Lead II, so it reads the greatest positive voltage...\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO4: Based on knowledge of electrode location, describe the predicted direction of the mean vector...",
+                fullLO: "LO4: Based on knowledge of electrode location, describe the predicted direction of the mean vector based on voltage/shape of QRS in leads I, II, and III.",
+                question: "If the mean cardiac vector is perpendicular to the axis of a specific lead (e.g., aVL), what voltage will be recorded on that lead?",
+                options: {
+                    A: "High negative voltage",
+                    B: "High positive voltage",
+                    C: "Low negative voltage",
+                    D: "Low positive voltage",
+                    E: "Zero voltage"
+                },
+                correctAnswer: "E",
+                rationale: "If the mean vector is perpendicular to the axis of a lead, the voltage is zero.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 27: \"The mean vector is perpendicular to the axis of aVL, so voltage = 0.\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO5: Explain the difference between ventricular fibrillation and asystole.",
+                fullLO: "LO5: Explain the difference between ventricular fibrillation and asystole.",
+                question: "A patient's ECG shows a totally uncoordinated, chaotic wavy line with no discernible QRS complexes. There is no pulse. This rhythm is most likely:",
+                options: {
+                    A: "Atrial fibrillation",
+                    B: "First-degree AV block",
+                    C: "Sinus tachycardia",
+                    D: "Ventricular fibrillation",
+                    E: "Ventricular tachycardia"
+                },
+                correctAnswer: "D",
+                rationale: "Ventricular fibrillation is a totally uncoordinated contraction of cardiac muscle. The ECG shows a chaotic wavy line.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Pages 35 & 37: \"totally uncoordinated contraction of cardiac muscle... Ventricular Fibrillation\""
+            },
+            {
+                section: "Cardiac Cycle & Physiology of the ECG",
+                maskedLO: "LO5: Explain the difference between ventricular fibrillation and asystole.",
+                fullLO: "LO5: Explain the difference between ventricular fibrillation and asystole.",
+                question: "A patient in cardiac arrest has an ECG showing a flat line. This condition, defined as the cessation of all electrical signals, is known as:",
+                options: {
+                    A: "Atrial flutter",
+                    B: "Asystole",
+                    C: "Pulseless electrical activity (PEA)",
+                    D: "Ventricular fibrillation",
+                    E: "Ventricular tachycardia"
+                },
+                correctAnswer: "B",
+                rationale: "Asystole (cardiac arrest) is the cessation of all electrical signals. It is not synonymous with V-fib.",
+                source: "Cardiac_Cycle_and_Physiology_of_Electrocardiograms_PDF.pdf, Page 38: \"Asystole... Cardiac arrest is cessation of all electrical signals; not synonymous with V. fib.\""
+            },
+
+            // --- Section 4: Clinical Assessment of the Cardiovascular System & ECG ---
+            {
+                section: "Clinical Assessment of the Cardiovascular System & ECG",
+                maskedLO: "LO1: Discuss clues in the HPI that may lead you to suspect underlying cardiovascular disease",
+                fullLO: "LO1: Discuss clues in the HPI that may lead you to suspect underlying cardiovascular disease",
+                question: "A 50-year-old male presents with \"tearing\" chest pain that radiates to his back. This description is most characteristic of which cardiovascular emergency?",
+                options: {
+                    A: "Acute Aortic Dissection",
+                    B: "Acute Pericarditis",
+                    C: "Costochondritis",
+                    D: "Myocardial Infarction",
+                    E: "Pulmonary Embolus"
+                },
+                correctAnswer: "A",
+                rationale: "Acute aortic dissection presents with sudden-onset, \"ripping\" or \"tearing\" pain that radiates to the back.",
+                source: "Clinical_Assessment_of_the_Cardiovascular_System_and_ECG_Interpretation_PDF.pdf, Page 7: \"Chest pain – Acute Aortic Dissection... Sudden-onset, 'ripping', 'tearing' pain, radiates to the back\""
+            },
+            {
+                section: "Clinical Assessment of the Cardiovascular System & ECG",
+                maskedLO: "LO1: Discuss clues in the HPI that may lead you to suspect underlying cardiovascular disease",
+                fullLO: "LO1: Discuss clues in the HPI that may lead you to suspect underlying cardiovascular disease",
+                question: "A patient complains of shortness of breath when lying flat in bed, requiring them to use multiple pillows to sleep. This symptom is known as:",
+                options: {
+                    A: "Bendopnea",
+                    B: "Claudication",
+                    C: "Dyspnea on exertion",
+                    D: "Orthopnea",
+                    E: "Paroxysmal nocturnal dyspnea"
+                },
+                correctAnswer: "D",
+                rationale: "Orthopnea is defined as dyspnea when lying down flat. It is a symptom of volume overload/heart failure.",
+                source: "Clinical_Assessment_of_the_Cardiovascular_System_and_ECG_Interpretation_PDF.pdf, Page 10: \"Orthopnea – dyspnea when lying down flat\""
+            },
+            {
+                section: "Clinical Assessment of the Cardiovascular System & ECG",
+                maskedLO: "LO2: Review the cardiac physical examination... Identify clues on exam...",
+                fullLO: "LO2: Review the cardiac physical examination – Identify clues on exam which may indicate the presence of underlying cardiovascular disease",
+                question: "During a physical examination, the physician palpates the carotid pulse. If the pulse is felt to be weak and delayed (pulsus parvus et tardus), this finding suggests obstruction at which valve?",
+                options: {
+                    A: "Aortic valve",
+                    B: "Mitral valve",
+                    C: "Pulmonary valve",
+                    D: "Tricuspid valve",
+                    E: "Venous valve"
+                },
+                correctAnswer: "A",
+                rationale: "If there is obstruction (e.g., through the aortic valve), the pulse will be delayed (pulsus tardus) and weak (pulsus parvus).",
+                source: "Clinical_Assessment_of_the_Cardiovascular_System_and_ECG_Interpretation_PDF.pdf, Page 23: \"If there is obstruction (e.g. in the presence of obstruction through the aortic valve), the pulse will be delayed – pulsus tardus\""
+            },
+            {
+                section: "Clinical Assessment of the Cardiovascular System & ECG",
+                maskedLO: "LO2: Review the cardiac physical examination... Identify clues on exam...",
+                fullLO: "LO2: Review the cardiac physical examination – Identify clues on exam which may indicate the presence of underlying cardiovascular disease",
+                question: "Upon inspection of the neck, a physician notes a distended jugular venous pulse (JVP) that rises when pressure is applied to the liver (hepatojugular reflux). This finding is most indicative of:",
+                options: {
+                    A: "Aortic aneurysm",
+                    B: "Left ventricular hypertrophy",
+                    C: "Peripheral arterial disease",
+                    D: "Right heart failure/volume overload",
+                    E: "Systemic hypertension"
+                },
+                correctAnswer: "D",
+                rationale: "JVP reflects right atrial pressure. Distention suggests volume overload or right heart failure. Hepatojugular reflux increases JVP.",
+                source: "Clinical_Assessment_of_the_Cardiovascular_System_and_ECG_Interpretation_PDF.pdf, Pages 18 & 19: \"Hepatojugular reflux – pressure under the liver increases jugular venous distention... if cardiac filling pressure rises (specifically right atrial pressure), the internal jugular veins will become relatively more distended\""
+            },
+            {
+                section: "Clinical Assessment of the Cardiovascular System & ECG",
+                maskedLO: "LO3: Review the anatomy of the cardiac conduction system... Correlate with the normal ECG",
+                fullLO: "LO3: Review the anatomy of the cardiac conduction system – Correlate with the normal ECG",
+                question: "In the normal sequence of endocardial activation, which structure is activated immediately following the sinoatrial (SA) node?",
+                options: {
+                    A: "Atrioventricular (AV) node",
+                    B: "Bundle of His",
+                    C: "Left Bundle Branch",
+                    D: "Purkinje fibers",
+                    E: "Right Atrium"
+                },
+                correctAnswer: "E",
+                rationale: "Activation spreads centrifugally from the SA node to activate the right atrium before reaching the AV node.",
+                source: "Clinical_Assessment_of_the_Cardiovascular_System_and_ECG_Interpretation_PDF.pdf, Page 43: \"Activation spreads centrifugally from the SA node to activate the right atrium\""
+            },
+            {
+                section: "Clinical Assessment of the Cardiovascular System & ECG",
+                maskedLO: "LO3: Review the anatomy of the cardiac conduction system... Correlate with the normal ECG",
+                fullLO: "LO3: Review the anatomy of the cardiac conduction system – Correlate with the normal ECG",
+                question: "The structure responsible for delaying the electrical impulse to allow for ventricular filling, which corresponds to the flat PR interval on an ECG, is the:",
+                options: {
+                    A: "AV node",
+                    B: "Bachmann’s bundle",
+                    C: "Bundle of His",
+                    D: "Left bundle branch",
+                    E: "Purkinje fibers"
+                },
+                correctAnswer: "A",
+                rationale: "The compact AV node is activated after the atrium. It has very low voltage (does not register on ECG) and creates the flat PR interval. Its job is to pause A-to-V conduction.",
+                source: "Clinical_Assessment_of_the_Cardiovascular_System_and_ECG_Interpretation_PDF.pdf, Page 51: \"Compact AV node is activated – very low voltage, does not register on ECG (flat PR interval)\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.textContent = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.textContent = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const [key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    span.textContent = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.textContent = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
