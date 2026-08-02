@@ -1391,7 +1391,7 @@ function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); 
 const sections = [];
 quizData.forEach(q => { if (!sections.includes(q.section)) sections.push(q.section); });
 function shortLabel(name) {
-    const map = {};
+    const map = {"Thoracic Wall, Heart, and Mediastinum":"Thoracic Wall & Mediastinum","Cardiac Cycle & Physiology of the ECG":"Cardiac Cycle & ECG","Clinical Assessment of the Cardiovascular System & ECG":"CV Assessment & ECG"};
     return map[name] || name;
 }
 window.__bbShortLabel = shortLabel;
